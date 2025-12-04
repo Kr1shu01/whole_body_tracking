@@ -1,0 +1,98 @@
+policy_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/squat2_g1_f01:v0/policy.onnx"
+motion_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/squat2_g1_f01:v0/motion.npz"
+# policy_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/dance2_subject1/policy.onnx"
+# motion_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/dance2_subject1/motion.npz"
+
+# policy_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/dance_zui:v0/policy_zuiwu_48000.onnx"
+# motion_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/dance_zui:v0/dance_zui.npz"
+xml_path: "{LEGGED_GYM_ROOT_DIR}/source/whole_body_tracking/whole_body_tracking/assets/unitree_description/mjcf/g1.xml"
+urdf_path: "{LEGGED_GYM_ROOT_DIR}/source/whole_body_tracking/whole_body_tracking/assets/unitree_description/urdf/g1/main.urdf"
+
+IMU_NOISE: true
+MOTOR_NOISE: true
+
+# Total simulation time
+simulation_duration: 1000
+# Simulation time step
+simulation_dt: 0.002
+# Controller update frequency (meets the requirement of simulation_dt * controll_decimation=0.02; 50Hz)
+control_decimation: 10
+
+kps: [
+    # 左腿
+    40.179238, 99.098428, 40.179238, 99.098428, 28.501246, 28.501246,
+    # 右腿
+    40.179238, 99.098428, 40.179238, 99.098428, 28.501246, 28.501246,
+    # 腰（yaw 使用 7520_14；roll/pitch 使用 2*5020）
+    40.179238, 28.501246, 28.501246,
+    # 左臂（肩/肘/腕roll 用 5020；腕 pitch/yaw 用 4010）
+    14.250623, 14.250623, 14.250623, 14.250623, 14.250623, 16.778327, 16.778327,
+    # 右臂
+    14.250623, 14.250623, 14.250623, 14.250623, 14.250623, 16.778327, 16.778327]
+
+kds: [
+    # 左腿
+    2.557890, 6.308802, 2.557890, 6.308802, 1.814446, 1.814446,
+    # 右腿 
+    2.557890, 6.308802, 2.557890, 6.308802, 1.814446, 1.814446,
+    # 腰
+    2.557890, 1.814446, 1.814446,
+    # 左臂
+    0.907223, 0.907223, 0.907223, 0.907223, 0.907223, 1.068142, 1.068142,
+    # 右臂
+    0.907223, 0.907223, 0.907223, 0.907223, 0.907223, 1.068142, 1.068142]
+
+
+default_pos: [
+    -0.312, 0.0, 0.0, 0.669, -0.363, 0.0,        # 左腿
+    -0.312, 0.0, 0.0, 0.669, -0.363, 0.0,        # 右腿
+    0.0, 0.0, 0.0,                               # 腰
+    0.2, 0.2, 0.0, 0.6, 0.0, 0.0, 0.0,           # 左臂
+    0.2, -0.2, 0.0, 0.6, 0.0, 0.0, 0.0]           # 右臂
+
+action_scale: [
+    # 左腿
+    0.547546, 0.350661, 0.547546, 0.350661, 0.438577, 0.438577,
+    # 右腿
+    0.547546, 0.350661, 0.547546, 0.350661, 0.438577, 0.438577,
+    # 腰
+    0.547546, 0.438577, 0.438577,
+    # 左臂
+    0.438577, 0.438577, 0.438577, 0.438577, 0.438577, 0.074501, 0.074501,
+    # 右臂
+    0.438577, 0.438577, 0.438577, 0.438577, 0.438577, 0.074501, 0.074501]
+
+ang_vel_scale: 0.25
+dof_pos_scale: 1.0
+dof_vel_scale: 0.05
+num_actions: 29
+num_obs: 154
+
+# ['left_hip_pitch_joint', 'right_hip_pitch_joint', 'waist_yaw_joint',
+#  'left_hip_roll_joint', 'right_hip_roll_joint', 'waist_roll_joint',
+#  'left_hip_yaw_joint', 'right_hip_yaw_joint', 'waist_pitch_joint',
+#  'left_knee_joint', 'right_knee_joint',
+#  'left_shoulder_pitch_joint','right_shoulder_pitch_joint',
+#  'left_ankle_pitch_joint', 'right_ankle_pitch_joint',
+#  'left_shoulder_roll_joint', 'right_shoulder_roll_joint',
+#  'left_ankle_roll_joint', 'right_ankle_roll_joint',
+#  'left_shoulder_yaw_joint', 'right_shoulder_yaw_joint',
+#  'left_elbow_joint', 'right_elbow_joint',
+#  'left_wrist_roll_joint', 'right_wrist_roll_joint',
+#  'left_wrist_pitch_joint', 'right_wrist_pitch_joint',
+#  'left_wrist_yaw_joint', 'right_wrist_yaw_joint']
+
+# +-----------------------------------------------------------+
+# |Active Observation Terms in Group: 'policy' (shape: (160,))|
+# +-----------+-----------------------------------+-----------+
+# |   Index   | Name                              |   Shape   |
+# +-----------+-----------------------------------+-----------+
+# |     0     | command                           |   (58,)   |
+# |     1     | motion_anchor_pos_b               |    (3,)   |
+# |     2     | motion_anchor_ori_b               |    (6,)   |
+# |     3     | base_lin_vel                      |    (3,)   |
+# |     4     | base_ang_vel                      |    (3,)   |
+# |     5     | joint_pos                         |   (29,)   |
+# |     6     | joint_vel                         |   (29,)   |
+# |     7     | actions                           |   (29,)   |
+# +-----------+-----------------------------------+-----------+

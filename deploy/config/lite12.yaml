@@ -1,0 +1,60 @@
+
+policy_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/dunqi_f0_lite12:v5/policy.onnx"
+motion_path: "{LEGGED_GYM_ROOT_DIR}/artifacts/dunqi_f0_lite12:v5/motion.npz"
+xml_path: "{LEGGED_GYM_ROOT_DIR}/source/whole_body_tracking/whole_body_tracking/assets/lite1_2/lite1_2.xml"
+
+# urdf_path: "{LEGGED_GYM_ROOT_DIR}/scripts/source/whole_body_tracking/whole_body_tracking/assets/miniloong/urdf/miniloong_fixed.urdf"
+
+IMU_NOISE: true
+MOTOR_NOISE: true
+
+# Total simulation time
+simulation_duration: 1000
+# Simulation time step
+simulation_dt: 0.002
+# Controller update frequency (meets the requirement of simulation_dt * controll_decimation=0.02; 50Hz)
+control_decimation: 10
+
+kps: [
+    # 左腿
+    280, 240, 150, 280, 150, 150,
+    # 右腿
+    280, 240, 150, 280, 150, 150,
+    # 左手
+    80, 80, 80, 80, 16, 16, 16,
+    # 右手
+    80, 80, 80, 80, 16, 16, 16,
+    ]
+
+kds: [
+    # 左腿
+    14, 12, 10, 14, 10, 10,
+    # 右腿 
+    14, 12, 10, 14, 10, 10,
+    # 左手
+    8, 8, 8, 8, 1.6, 1.6, 1.6,
+    # 右手
+    8, 8, 8, 8, 1.6, 1.6, 1.6]
+
+
+default_pos: [
+    -0.1, 0.0, 0.0, 0.2, -0.1, 0.0,
+    -0.1, 0.0, 0.0, 0.2, -0.1, 0.0,
+    0.0, 0.2, 0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, -0.2, 0.0, 1.0, 0.0, 0.0, 0.0]
+
+action_scale: [
+    # 左腿
+    0.2167, 0.15625, 0.2946, 0.1339, 0.45, 0.45,
+    # 右腿
+    0.2167, 0.15625, 0.2946, 0.1339, 0.45, 0.45,
+    # 左臂
+    0.3031, 0.3031, 0.0844, 0.0844, 0.1094, 0.1094, 0.1094,
+    # 右臂
+    0.3031, 0.3031, 0.0844, 0.0844, 0.1094, 0.1094, 0.1094]
+
+ang_vel_scale: 0.25
+dof_pos_scale: 1.0
+dof_vel_scale: 0.05
+num_actions: 26
+num_obs: 139
